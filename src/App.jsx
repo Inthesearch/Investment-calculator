@@ -12,6 +12,7 @@ const initialValue = {
 
 function App() {
   const [currentValue, setCurrentValue] = useState(initialValue);
+  const isValid = currentValue.duration > 0;
 
   function handleChange(valueIdentifier, newValue) {
     setCurrentValue((prevValue) => {
@@ -22,13 +23,15 @@ function App() {
     });
   }
 
-  console.log(currentValue);
-
   return (
     <>
       <Header />
       <UserInput input={currentValue} onChange={handleChange} />
-      <Results input="currentValue" />
+      {isValid ? (
+        <Results input={currentValue} />
+      ) : (
+        <p className="center">Please insert valid no of years.</p>
+      )}
     </>
   );
 }
